@@ -4,12 +4,12 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/vjeantet/goDashing"
+	"goDashing"
 )
 
 type piechart struct{}
 
-func (j *piechart) Work(send chan *dashing.Event, webroot string) {
+func (j *piechart) Work(send chan *dashing.Event, webroot string, url string, token string) {
 	run(send)
 	for {
 		select {

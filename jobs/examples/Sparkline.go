@@ -4,12 +4,12 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/vjeantet/goDashing"
+	"goDashing"
 )
 
 type sparklinechart struct{}
-
-func (j *sparklinechart) Work(send chan *dashing.Event, webroot string) {
+// send chan *Event, webroot string
+func (j *sparklinechart) Work(send chan *dashing.Event, webroot string, url string, token string) {
 	ticker := time.NewTicker(1 * time.Second)
 
 	for {

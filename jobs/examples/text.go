@@ -3,12 +3,12 @@ package gojobs
 import (
 	"time"
 
-	"github.com/vjeantet/goDashing"
+	"goDashing"
 )
 
 type sampleTXT struct{}
 
-func (j *sampleTXT) Work(send chan *dashing.Event, webroot string) {
+func (j *sampleTXT) Work(send chan *dashing.Event, webroot string, url string, token string) {
 	ticker := time.NewTicker(5 * time.Second)
 	for {
 		select {

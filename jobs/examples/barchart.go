@@ -4,12 +4,12 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/vjeantet/goDashing"
+	"goDashing"
 )
 
 type samplebar struct{}
 
-func (j *samplebar) Work(send chan *dashing.Event, webroot string) {
+func (j *samplebar) Work(send chan *dashing.Event, webroot string, url string, token string) {
 	ticker := time.NewTicker(1 * time.Second)
 
 	for {

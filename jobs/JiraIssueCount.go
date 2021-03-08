@@ -15,7 +15,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/andygrunwald/go-jira"
 	"github.com/streamrail/concurrent-map"
-	"github.com/vjeantet/goDashing"
+	"goDashing"
 )
 
 type jiraIssueCount struct {

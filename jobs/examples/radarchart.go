@@ -4,12 +4,12 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/vjeantet/goDashing"
+	"goDashing"
 )
 
 type radarchart struct{}
 
-func (j *radarchart) Work(send chan *dashing.Event, webroot string) {
+func (j *radarchart) Work(send chan *dashing.Event, webroot string, url string, token string) {
 	ticker := time.NewTicker(1 * time.Second)
 
 	for {

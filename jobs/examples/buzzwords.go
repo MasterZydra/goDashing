@@ -4,14 +4,14 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/vjeantet/goDashing"
+	"goDashing"
 )
 
 type buzzwords struct {
 	words []map[string]interface{}
 }
 
-func (j *buzzwords) Work(send chan *dashing.Event, webroot string) {
+func (j *buzzwords) Work(send chan *dashing.Event, webroot string, url string, token string) {
 	ticker := time.NewTicker(1 * time.Second)
 	for {
 		select {
