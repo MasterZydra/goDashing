@@ -4,6 +4,10 @@ versionLabel=$1
 productName="goDashing"
 releaseFolder="release/"
 
+if ! [ -f "${releaseFolder}" ]; then
+    mkdir ${releaseFolder}
+fi
+
 rm ${releaseFolder}*.tgz
 rm ${releaseFolder}*.zip
 
