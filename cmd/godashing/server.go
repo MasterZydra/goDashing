@@ -1,4 +1,4 @@
-package dashing
+package main
 
 import (
 	"bytes"
@@ -132,7 +132,7 @@ func (s *Server) fileGetContent(path string, boxName string) (string, int, error
 
 	fileContent, err = box.String(path)
 	if err != nil {
-		return "", locationBOX, fmt.Errorf("file %s not found in box : %s\n", path, boxName, err.Error())
+		return "", locationBOX, fmt.Errorf("file %s not found in box %s : %s\n", path, boxName, err.Error())
 	}
 
 	return fileContent, locationBOX, err

@@ -5,9 +5,6 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
-
-	dashing "goDashing"
-	_ "goDashing/jobs"
 )
 
 func main() {
@@ -24,7 +21,7 @@ func main() {
 		webroot = webroot + string(filepath.Separator)
 	}
 
-	dash := dashing.NewDashing(webroot, port, os.Getenv("TOKEN")).Start()
+	dash := NewDashing(webroot, port, os.Getenv("TOKEN")).Start()
 	log.Println("listening on :" + port)
 
 	http.Handle("/", dash)

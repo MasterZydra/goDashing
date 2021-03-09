@@ -1,4 +1,4 @@
-package dashing
+package main
 
 // A Job does periodic work and sends events to a channel.
 type Job interface {

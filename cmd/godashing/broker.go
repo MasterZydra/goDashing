@@ -1,4 +1,4 @@
-package dashing
+package main
 
 // An eventCache stores the latest event for each key, so that new clients can
 // catch up.

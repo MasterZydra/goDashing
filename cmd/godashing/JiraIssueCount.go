@@ -1,4 +1,4 @@
-package jobs
+package main
 
 import (
 	"fmt"
@@ -15,7 +15,6 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/andygrunwald/go-jira"
 	"github.com/streamrail/concurrent-map"
-	"goDashing"
 )
 
 type jiraIssueCount struct {
@@ -39,7 +38,7 @@ type JiraIssurConfigIndicator struct {
 	DangerUnder  int
 }
 
-func (j *jiraIssueCount) Work(send chan *dashing.Event, webroot string, url string, token string) {
+func (j *jiraIssueCount) Work(send chan *Event, webroot string, url string, token string) {
 	j.config = &jiraIssueConfig{
 		Interval:   60,
 		Indicators: cmap.New(),
@@ -71,7 +70,7 @@ func (j *jiraIssueCount) Work(send chan *dashing.Event, webroot string, url stri
 	}
 }
 
-func (j *jiraIssueCount) pushData(send chan *dashing.Event) {
+func (j *jiraIssueCount) pushData(send chan *Event) {
 	for WID, indicator := range j.config.Indicators.Items() {
 		count, err := j.getNumberOfIssues(indicator.(JiraIssurConfigIndicator).Jql)
 		if err != nil {
@@ -81,7 +80,7 @@ func (j *jiraIssueCount) pushData(send chan *dashing.Event) {
 
 		status, _ := j.getIndicatorStatus(count, indicator.(JiraIssurConfigIndicator))
 
-		send <- dashing.NewEvent(
+		send <- NewEvent(
 			WID,
 			map[string]interface{}{
 				"current": count,
@@ -289,5 +288,5 @@ func (j *jiraIssueCount) watchChanges(dashroot string) {
 }
 
 func init() {
-	dashing.Register(&jiraIssueCount{})
+	Register(&jiraIssueCount{})
 }

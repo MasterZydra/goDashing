@@ -1,4 +1,4 @@
-package jobs
+package main
 
 import (
 	"bytes"
@@ -15,12 +15,11 @@ import (
 
 	"github.com/carlescere/scheduler"
 	"github.com/streamrail/concurrent-map"
-	"goDashing"
 )
 
 type execJob struct {
 	tasks cmap.ConcurrentMap
-	send  chan *dashing.Event
+	send  chan *Event
 	url   string
 	token string
 }
@@ -41,7 +40,7 @@ const (
 	XBIN
 )
 
-func (j *execJob) Work(send chan *dashing.Event, webroot string, url string, token string) {
+func (j *execJob) Work(send chan *Event, webroot string, url string, token string) {
 	j.tasks = cmap.New()
 	j.send = send
 	j.url = url
@@ -102,7 +101,7 @@ func (j *execJob) readDir(jobspath string) {
 	}
 }
 
-func (t *task) start(send chan *dashing.Event) {
+func (t *task) start(send chan *Event) {
 
 	var err error
 	t.job, err = scheduler.Every(t.interval).Seconds().Run(func() {
@@ -133,13 +132,13 @@ func (t *task) start(send chan *dashing.Event) {
 			return
 		}
 
-		send <- dashing.NewEvent(t.widgetID, j, "")
+		send <- NewEvent(t.widgetID, j, "")
 
 		//log.Printf("JOB - %s - run - %s", t.name, data)
 	})
 
 	if err != nil {
-		log.Printf("ExecJob - %s - scheduler error %s : %s", t.name, t.path, err.Error)
+		log.Printf("ExecJob - %s - scheduler error %s : %s", t.name, t.path, err.Error())
 		return
 	}
 	log.Printf("ExecJob - %s - scheduled every %ds", t.name, t.interval)
@@ -209,5 +208,5 @@ func (j *execJob) watchChanges(jobspath string) {
 }
 
 func init() {
-	dashing.Register(&execJob{})
+	Register(&execJob{})
 }

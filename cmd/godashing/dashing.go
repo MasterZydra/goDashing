@@ -1,13 +1,14 @@
-package dashing
+package main
 
 import (
+	"godashing/internal/utils"
 	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
 	"time"
 
-	"github.com/GeertJohan/go.rice"
+	rice "github.com/GeertJohan/go.rice"
 )
 
 // An Event contains the widget ID, a body of data,
@@ -63,7 +64,7 @@ func (d *Dashing) Start() *Dashing {
 func (d *Dashing) initFolders() {
 
 	// Si dashboards n'existe pas
-	if ok, _ := exists(d.Worker.webroot + "dashboards"); !ok {
+	if ok, _ := utils.Exists(d.Worker.webroot + "dashboards"); !ok {
 		os.MkdirAll(d.Worker.webroot+"dashboards", 0777)
 		d1, _ := rice.MustFindBox("assets/dashboards").String("sample.gerb")
 		ioutil.WriteFile(d.Worker.webroot+"dashboards"+string(filepath.Separator)+"sample.gerb", []byte(d1), 0644)
@@ -72,7 +73,7 @@ func (d *Dashing) initFolders() {
 	}
 
 	// Si jobs n'existe pas
-	if ok, _ := exists(d.Worker.webroot + "jobs"); !ok {
+	if ok, _ := utils.Exists(d.Worker.webroot + "jobs"); !ok {
 		os.MkdirAll(d.Worker.webroot+"jobs", 0777)
 		jobbox := rice.MustFindBox("assets/jobs")
 		jobbox.Walk("", func(path string, f os.FileInfo, err error) error {
@@ -81,17 +82,6 @@ func (d *Dashing) initFolders() {
 			return nil
 		})
 	}
-}
-
-func exists(path string) (bool, error) {
-	_, err := os.Stat(path)
-	if err == nil {
-		return true, nil
-	}
-	if os.IsNotExist(err) {
-		return false, nil
-	}
-	return true, err
 }
 
 // NewDashing sets up the event broker, workers and webservice.
