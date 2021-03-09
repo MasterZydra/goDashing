@@ -1,46 +1,8 @@
-
-# added by GitSavvy
+# macOS
 .DS_Store
 
-# added by GitSavvy
-/assets-dashboards.rice-box.go
+# Releases
+release/
 
-# added by GitSavvy
-/assets-jobs.rice-box.go
-
-# added by GitSavvy
-/assets-public.rice-box.go
-
-# added by GitSavvy
-/assets-widgets.rice-box.go
-
-# added by GitSavvy
-/dashboards/
-
-# added by GitSavvy
-/public/
-
-# added by GitSavvy
-/release/
-
-# added by GitSavvy
-/widgets/
-
-# added by GitSavvy
-/cmd/conf/
-
-# added by GitSavvy
-/cmd/dashboards/
-
-# added by GitSavvy
-/cmd/jobs/
-
-
-# added by GitSavvy
-/dashing.exe
-
-# added by GitSavvy
-/jobs/5_sampleTXT.php
-
-# added by GitSavvy
-/cmd/public/
+# Dependencies
+vendor/
