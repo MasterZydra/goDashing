@@ -1,3 +1,16 @@
+# GoDashing
+
+**Contentlist**  
+
+# Setting up project
+`go mod vendor``
+
+`go get github.com/GeertJohan/go.rice`
+
+`go get github.com/GeertJohan/go.rice/rice`
+
+
+
 goDashing
 ==========
 
