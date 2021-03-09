@@ -1,3 +1,4 @@
+[![Go](https://github.com/Hein-Software-Solutions/goDashing/actions/workflows/go.yml/badge.svg)](https://github.com/Hein-Software-Solutions/goDashing/actions/workflows/go.yml)
 # GoDashing
 
 **Contentlist**  
