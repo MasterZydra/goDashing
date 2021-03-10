@@ -12,14 +12,6 @@ rm ${releaseFolder}*.zip 2>/dev/null
 rice embed-go
 
 arch=amd64
-os=windows
-product=${productName}_${versionLabel}_${os}_${arch}
-env GOOS=$os GOARCH=$arch go build -ldflags="-s -w -X main.version=${1} -X main.buildstamp=`date -u '+%Y-%m-%d_%I:%M:%S%p'` " -o ${product}.exe ./cmd/godashing/...
-zip -r ${product}.zip ${product}.exe
-rm $product.exe
-mv $product.zip ${releaseFolder}/
-
-arch=amd64
 os=darwin
 product=${productName}_${versionLabel}_${os}_${arch}
 env GOOS=$os GOARCH=$arch go build -ldflags="-s -w -X main.version=${1} -X main.buildstamp=`date -u '+%Y-%m-%d_%I:%M:%S%p'` " -o $product ./cmd/godashing/...
@@ -52,6 +44,14 @@ rm $product
 mv $product.tgz ${releaseFolder}/
 
 arch=386
+os=windows
+product=${productName}_${versionLabel}_${os}_${arch}
+env GOOS=$os GOARCH=$arch go build -ldflags="-s -w -X main.version=${1} -X main.buildstamp=`date -u '+%Y-%m-%d_%I:%M:%S%p'` " -o ${product}.exe ./cmd/godashing/...
+zip -r ${product}.zip ${product}.exe
+rm $product.exe
+mv $product.zip ${releaseFolder}/
+
+arch=amd64
 os=windows
 product=${productName}_${versionLabel}_${os}_${arch}
 env GOOS=$os GOARCH=$arch go build -ldflags="-s -w -X main.version=${1} -X main.buildstamp=`date -u '+%Y-%m-%d_%I:%M:%S%p'` " -o ${product}.exe ./cmd/godashing/...
