@@ -2,53 +2,32 @@
 # GoDashing
 
 **Contentlist**  
+- [Common](#common)
+	- [Key features](#key-features)
+- [Setting up project](#setting-up-project)
+
+# Common
+goDashing is [Golang](http://golang.org) based framework that lets you build beautiful dashboards.
+This project is a "fork" of the original project [shopify/dashing](http://shopify.github.io/dashing) and [gigablah/dashing-go](https://github.com/gigablah/dashing-go). This dashing project was created at Shopify for displaying custom dashboards on TVs around the office.
+
+![example dashbaord](./docs/screenshot.png)
+
+## Key features
+- Works out of the box, no server, runtime or dependency requiered.
+- Use premade widgets, or fully create your own with css, html, and js.
+- Pull Data from JIRA to your dashboard with a html attribute.
+- Schedule and execute any script/binary file to feed data to your dashboard.
+- Use the API to push data to your dashboards.
+
 
 # Setting up project
-`go mod vendor``
+- Download all dependencies: `go mod vendor`
 
 `go get github.com/GeertJohan/go.rice`
 
 `go get github.com/GeertJohan/go.rice/rice`
 
-
-
-goDashing
-==========
-
-[![Codewake](https://www.codewake.com/badges/ask_question_flat_square.svg)](https://www.codewake.com/p/godashing)
-
-goDashing is [Golang][1] based framework that lets you build beautiful dashboards.
-This project is a "fork" of the original project [shopify/dashing][2] and [gigablah/dashing-go][3]
-
-Key features:
-
-* Works out of the box, no server, runtime or dependency requiered.
-* Use premade widgets, or fully create your own with css, html, and js.
-* Pull Data from JIRA to your dashboard with a html attribute.
-* Schedule and execute any script/binary file to feed data to your dashboard.
-* Use the API to push data to your dashboards.
-
-This dashing project was created at Shopify for displaying custom dashboards on TVs around the office.
-
-# Getting Started
-1. Get the app here https://github.com/vjeantet/goDashing/releases
-2. Start goDashing   ```$ ./goDashing```
-3. Go to http://127.0.0.1:8080
-
-	Your should see something like : 
-	![alt tag](https://raw.githubusercontent.com/vjeantet/goDashing/master/screenshot.png)	
-
-
-On the first start goDashing generates a demo dashboard and jobs to feed it.
-
-# Settings
-* default http port is 8080
-	* set a environnement variable ```PORT``` to change this.
-* default working directory is the path where it starts
-	* set ```WEBROOT```env var to change this.
-* default api TOKEN is empty
-	* set ```TOKEN```env var to change this.
-
+--------------------------------------
 
 # Create a new dashboard
 create a name_here.gerb file in the ```dashboards``` folder
@@ -129,7 +108,6 @@ Be sure to look at the [list of third party widgets][4].
 * convert scss to css : http://www.sassmeister.com
 
 
-[1]: http://golang.org
-[2]: http://shopify.github.io/dashing
-[3]: https://github.com/gigablah/dashing-go
+[2]: 
+[3]: 
 [4]: https://github.com/Shopify/dashing/wiki/Additional-Widgets
