@@ -1,13 +1,20 @@
 package main
 
 import (
+	"flag"
 	"log"
 	"net/http"
 	"os"
 	"path/filepath"
 )
 
+var debugmode bool
+
 func main() {
+	debug := flag.Bool("debugmode", false, "Debug mode for extended informations")
+	flag.Parse()
+	debugmode = *debug
+
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"

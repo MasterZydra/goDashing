@@ -95,11 +95,8 @@ func NewDashing(root string, port string, token string) *Dashing {
 	worker.url = "http://127.0.0.1:" + port
 	worker.token = token
 
-	if os.Getenv("DEV") != "" {
-		server.dev = true
-	}
+	server.dev = debugmode
 
-	server.dev = true
 	return &Dashing{
 		started: false,
 		Broker:  broker,
