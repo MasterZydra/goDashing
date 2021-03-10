@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -12,13 +13,10 @@ var debugmode bool
 
 func main() {
 	debug := flag.Bool("debugmode", false, "Debug mode for extended informations")
+	port := flag.Int("port", 8080, "Port the server is listening on")
 	flag.Parse()
 	debugmode = *debug
-
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
+	portStr := fmt.Sprintf("%v", *port)
 
 	var webroot string
 	if os.Getenv("WEBROOT") != "" {
@@ -28,11 +26,10 @@ func main() {
 		webroot = webroot + string(filepath.Separator)
 	}
 
-	dash := NewDashing(webroot, port, os.Getenv("TOKEN")).Start()
-	log.Println("listening on :" + port)
+	dash := NewDashing(webroot, portStr, os.Getenv("TOKEN")).Start()
+	log.Println("listening on :" + portStr)
 
 	http.Handle("/", dash)
 
-	log.Fatal(http.ListenAndServe(":"+port, nil))
-
+	log.Fatal(http.ListenAndServe(":"+portStr, nil))
 }
