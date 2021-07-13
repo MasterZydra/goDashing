@@ -62,8 +62,7 @@ func (d *Dashing) Start() *Dashing {
 }
 
 func (d *Dashing) initFolders() {
-
-	// Si dashboards n'existe pas
+	// If dashboards do not exist
 	if ok, _ := utils.Exists(d.Worker.webroot + "dashboards"); !ok {
 		os.MkdirAll(d.Worker.webroot+"dashboards", 0777)
 		d1, _ := rice.MustFindBox("assets/dashboards").String("sample.gerb")
@@ -72,7 +71,7 @@ func (d *Dashing) initFolders() {
 		ioutil.WriteFile(d.Worker.webroot+"dashboards"+string(filepath.Separator)+"layout.gerb", []byte(d2), 0644)
 	}
 
-	// Si jobs n'existe pas
+	// If jobs do not exist
 	if ok, _ := utils.Exists(d.Worker.webroot + "jobs"); !ok {
 		os.MkdirAll(d.Worker.webroot+"jobs", 0777)
 		jobbox := rice.MustFindBox("assets/jobs")
