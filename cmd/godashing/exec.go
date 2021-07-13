@@ -122,6 +122,10 @@ func (t *task) start(send chan *Event) {
 
 		data, err := doExec(command, args...)
 		if err != nil {
+			if strings.Contains(err.Error(), "Xdebug: [Step Debug] Could not connect to debugging client.") {
+				return
+			}
+		
 			log.Printf("ExecJob - %s - error executing %s %s : %s", command, args, err.Error(), data)
 			return
 		}
