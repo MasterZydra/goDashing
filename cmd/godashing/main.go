@@ -10,12 +10,15 @@ import (
 )
 
 var debugmode bool
+var root string
 
 func main() {
 	debug := flag.Bool("debugmode", false, "Debug mode for extended informations")
 	port := flag.Int("port", 8080, "Port the server is listening on")
+	webroot := flag.String("webroot", "", "root path for webserver")
 	flag.Parse()
 	debugmode = *debug
+
 	// Port
 	// - flag
 	portStr := fmt.Sprintf("%v", *port)
@@ -25,15 +28,22 @@ func main() {
 		portStr = portEnv
  	}
 
-	var webroot string
-	if os.Getenv("WEBROOT") != "" {
-		webroot = filepath.Clean(os.Getenv("WEBROOT")) + string(filepath.Separator)
+	// Web root
+	// - flag
+	root := *webroot
+	if root == "" {
+		root, _ = os.Getwd()
+		root = root + string(filepath.Separator)
 	} else {
-		webroot, _ = os.Getwd()
-		webroot = webroot + string(filepath.Separator)
+		root = filepath.Clean(root) + string(filepath.Separator)
+	}
+	// - env
+	webrootEnv := os.Getenv("WEBROOT")
+	if webrootEnv != "" {
+		root = filepath.Clean(webrootEnv) + string(filepath.Separator)
 	}
 
-	dash := NewDashing(webroot, portStr, os.Getenv("TOKEN")).Start()
+	dash := NewDashing(root, portStr, os.Getenv("TOKEN")).Start()
 	log.Println("listening on :" + portStr)
 
 	http.Handle("/", dash)
