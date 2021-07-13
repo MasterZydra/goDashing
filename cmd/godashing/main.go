@@ -43,6 +43,9 @@ func main() {
 		root = filepath.Clean(webrootEnv) + string(filepath.Separator)
 	}
 
+	// Extract assets from executable
+	ExtractAssets()
+	
 	dash := NewDashing(root, portStr, os.Getenv("TOKEN")).Start()
 	log.Println("listening on :" + portStr)
 

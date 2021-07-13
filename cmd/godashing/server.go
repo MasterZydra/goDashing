@@ -15,8 +15,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/GeertJohan/go.rice"
-	"github.com/GeertJohan/go.rice/embedded"
+	"github.com/gobuffalo/packr"
 	"github.com/clbanning/mxj"
 	"github.com/husobee/vestigo"
 	"gopkg.in/karlseguin/gerb.v0"
@@ -99,7 +98,7 @@ const (
 func (s *Server) fileGetContent(path string, boxName string) (string, int, error) {
 	var fileContent string
 	var err error
-	var box *rice.Box
+	var box packr.Box
 
 	fullpath := filepath.Join(s.webroot, boxName, path)
 
@@ -117,11 +116,11 @@ func (s *Server) fileGetContent(path string, boxName string) (string, int, error
 
 	switch boxName {
 	case "public":
-		box, err = rice.FindBox("assets/public")
+		box = packr.NewBox("../../assets/public")
 	case "widgets":
-		box, err = rice.FindBox("assets/widgets")
+		box = packr.NewBox("../../assets/widgets")
 	case "dashboards":
-		box, err = rice.FindBox("assets/dashboards")
+		box = packr.NewBox("../../assets/dashboards")
 	default:
 		panic("Unknow BOX")
 	}
@@ -130,7 +129,7 @@ func (s *Server) fileGetContent(path string, boxName string) (string, int, error
 		return "", locationBOX, fmt.Errorf("Box %s not found : %s\n", boxName, err.Error())
 	}
 
-	fileContent, err = box.String(path)
+	fileContent, err = box.FindString(path)
 	if err != nil {
 		return "", locationBOX, fmt.Errorf("file %s not found in box %s : %s\n", path, boxName, err.Error())
 	}
@@ -250,12 +249,16 @@ func (s *Server) WidgetsJSHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//BOX
-	for k, v := range embedded.EmbeddedBoxes["assets/widgets"].Files {
-		if filepath.Ext(k) == ".js" && !stringInSlice(s.webroot+"widgets/"+k, files) {
-			w.Write([]byte(v.Content))
+	jobbox := packr.NewBox("../../assets/widgets")
+	jobbox.Walk(func(path string, f packr.File) error {
+		content, _ := jobbox.FindString(path)
+		if filepath.Ext(path) == ".js" && !stringInSlice(s.webroot+"widgets/"+path, files) {
+			w.Write([]byte(content))
 			w.Write([]byte("\n\n\n"))
 		}
-	}
+		return nil
+	})
+
 }
 
 func (s *Server) WidgetsCSSHandler(w http.ResponseWriter, r *http.Request) {
@@ -274,13 +277,15 @@ func (s *Server) WidgetsCSSHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//BOX
-	for k, v := range embedded.EmbeddedBoxes["assets/widgets"].Files {
-		if filepath.Ext(k) == ".css" && !stringInSlice(s.webroot+"widgets/"+k, files) {
-			w.Write([]byte(v.Content))
+	jobbox := packr.NewBox("../../assets/widgets")
+	jobbox.Walk(func(path string, f packr.File) error {
+		content, _ := jobbox.FindString(path)
+		if filepath.Ext(path) == ".css" && !stringInSlice(s.webroot+"widgets/"+path, files) {
+			w.Write([]byte(content))
 			w.Write([]byte("\n\n\n"))
 		}
-	}
-
+		return nil
+	})
 }
 
 func (s *Server) StaticHandler(w http.ResponseWriter, r *http.Request) {
