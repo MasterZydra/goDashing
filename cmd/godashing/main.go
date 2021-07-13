@@ -16,7 +16,14 @@ func main() {
 	port := flag.Int("port", 8080, "Port the server is listening on")
 	flag.Parse()
 	debugmode = *debug
+	// Port
+	// - flag
 	portStr := fmt.Sprintf("%v", *port)
+	// - env
+	portEnv := os.Getenv("PORT")
+ 	if portEnv != "" {
+		portStr = portEnv
+ 	}
 
 	var webroot string
 	if os.Getenv("WEBROOT") != "" {
