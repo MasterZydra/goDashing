@@ -23,9 +23,8 @@ This project is a "fork" of the original project [shopify/dashing](http://shopif
 # Setting up project
 - Download all dependencies: `go mod vendor`
 
-`go get github.com/GeertJohan/go.rice`
-
-`go get github.com/GeertJohan/go.rice/rice`
+# Build the project
+- `packr build -o ./goDashing ./cmd/godashing/...`
 
 --------------------------------------
 
