@@ -13,6 +13,7 @@ var debugmode bool
 var root string
 
 func main() {
+	// Flags
 	debug := flag.Bool("debugmode", false, "Debug mode for extended informations")
 	port := flag.Int("port", 8080, "Port the server is listening on")
 	webroot := flag.String("webroot", "", "root path for webserver")
@@ -44,7 +45,7 @@ func main() {
 	}
 
 	printProgramName()
-
+	// Log area "startup"
 	log.Println("----------------------------------------")
 	log.Println("   Startup")
 	log.Println("----------------------------------------")
@@ -55,12 +56,13 @@ func main() {
 	dash := NewDashing(root, portStr, os.Getenv("TOKEN")).Start()
 	log.Println("Listen on http://localhost:" + portStr)
 	println()
+	
+	// Log aread "running"
 	log.Println("----------------------------------------")
 	log.Println("  Running")
 	log.Println("----------------------------------------")
 
 	http.Handle("/", dash)
-
 	log.Fatal(http.ListenAndServe(":"+portStr, nil))
 }
 
