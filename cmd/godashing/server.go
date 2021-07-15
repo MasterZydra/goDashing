@@ -107,7 +107,7 @@ func (s *Server) fileGetContent(path string, boxName string) (string, int, error
 		var fileContentByte []byte
 		fileContentByte, err = ioutil.ReadFile(fullpath)
 		if err != nil {
-			return "", locationFS, fmt.Errorf("error while reading file %s: %s\n", fullpath, err.Error())
+			return "", locationFS, fmt.Errorf("error while reading file %s: %s", fullpath, err.Error())
 		}
 		// log.Printf("(FS) %s", fullpath)
 		fileContent = string(fileContentByte)
@@ -126,12 +126,12 @@ func (s *Server) fileGetContent(path string, boxName string) (string, int, error
 	}
 
 	if err != nil {
-		return "", locationBOX, fmt.Errorf("box %s not found : %s\n", boxName, err.Error())
+		return "", locationBOX, fmt.Errorf("box %s not found : %s", boxName, err.Error())
 	}
 
 	fileContent, err = box.FindString(path)
 	if err != nil {
-		return "", locationBOX, fmt.Errorf("file %s not found in box %s : %s\n", path, boxName, err.Error())
+		return "", locationBOX, fmt.Errorf("file %s not found in box %s : %s", path, boxName, err.Error())
 	}
 
 	return fileContent, locationBOX, err

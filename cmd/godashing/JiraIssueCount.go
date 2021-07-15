@@ -118,9 +118,9 @@ func (j *jiraIssueCount) getNumberOfIssues(jql string) (int, error) {
 		return 0, fmt.Errorf("JiraJob : error jira connect : %s", err)
 	}
 
-	if j.config.Username != "" && jiraClient.Authentication.Authenticated() == false {
+	if j.config.Username != "" && !jiraClient.Authentication.Authenticated() {
 		res, err := jiraClient.Authentication.AcquireSessionCookie(j.config.Username, j.config.Password)
-		if err != nil || res == false {
+		if err != nil || !res {
 			fmt.Printf("JiraJob : Authentification error : %v\n", res)
 			return 0, err
 		}
@@ -168,7 +168,6 @@ func (j *jiraIssueCount) readIndicators(dashroot string) {
 		doc.Find("div[jira-count-filter]").Each(func(i int, s *goquery.Selection) {
 			var jobInterval, dangerOver, warningOver, dangerUnder, warningUnder int
 
-			jobInterval = j.config.Interval
 			dangerOver = 0
 			warningOver = 0
 
@@ -203,7 +202,6 @@ func (j *jiraIssueCount) readIndicators(dashroot string) {
 		// find job="jira-count-jql"
 		doc.Find("div[jira-count-jql]").Each(func(i int, s *goquery.Selection) {
 			var jobInterval, dangerOver, warningOver, dangerUnder, warningUnder int
-			jobInterval = j.config.Interval
 			dangerOver = 0
 			warningOver = 0
 
