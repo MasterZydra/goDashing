@@ -6,3 +6,6 @@ release/
 
 # Dependencies
 vendor/
+
+# Packr
+a_main-packr.go
