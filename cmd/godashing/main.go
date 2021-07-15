@@ -46,7 +46,7 @@ func main() {
 	printProgramName()
 
 	log.Println("----------------------------------------")
-	log.Println("Startup")
+	log.Println("   Startup")
 	log.Println("----------------------------------------")
 
 	// Extract assets from executable
@@ -56,7 +56,7 @@ func main() {
 	log.Println("Listen on http://localhost:" + portStr)
 	println()
 	log.Println("----------------------------------------")
-	log.Println("Running")
+	log.Println("  Running")
 	log.Println("----------------------------------------")
 
 	http.Handle("/", dash)
