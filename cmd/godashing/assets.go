@@ -5,7 +5,6 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	//"strings"
 
 	"github.com/gobuffalo/packr"
 )
