@@ -3,6 +3,7 @@ package main
 import (
 	"godashing/internal/utils"
 	"io/ioutil"
+	"log"
 	"os"
 	"path/filepath"
 
@@ -19,10 +20,12 @@ func ExtractAssets() {
 func extractAsset(jobbox packr.Box) {
 	var assetPath = filepath.Base(jobbox.Path)
 
+	log.Println("Check for asset folder '" + assetPath + "'")
 	if ok, _ := utils.Exists(root + assetPath); ok {
 		return
 	}
 
+	log.Println("Extract asset folder '" + assetPath + "'")
 	jobbox.Walk(func(path string, f packr.File) error {		
 		os.MkdirAll(root + assetPath + string(filepath.Separator) + filepath.Dir(path), 0777)
 

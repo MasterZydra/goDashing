@@ -24,9 +24,9 @@ func main() {
 	portStr := fmt.Sprintf("%v", *port)
 	// - env
 	portEnv := os.Getenv("PORT")
- 	if portEnv != "" {
+	if portEnv != "" {
 		portStr = portEnv
- 	}
+	}
 
 	// Web root
 	// - flag
@@ -43,13 +43,35 @@ func main() {
 		root = filepath.Clean(webrootEnv) + string(filepath.Separator)
 	}
 
+	printProgramName()
+
+	log.Println("----------------------------------------")
+	log.Println("Startup")
+	log.Println("----------------------------------------")
+
 	// Extract assets from executable
 	ExtractAssets()
-	
+
 	dash := NewDashing(root, portStr, os.Getenv("TOKEN")).Start()
-	log.Println("listening on :" + portStr)
+	log.Println("Listen on http://localhost:" + portStr)
+	println()
+	log.Println("----------------------------------------")
+	log.Println("Running")
+	log.Println("----------------------------------------")
 
 	http.Handle("/", dash)
 
 	log.Fatal(http.ListenAndServe(":"+portStr, nil))
+}
+
+func printProgramName() {
+	println()
+	println()
+	println(" ..|'''.|          '||''|.                  '||       ||")
+	println(".|'     '    ...    ||   ||   ....    ....   || ..   ...  .. ...     ... .")
+	println("||    .... .|  '|.  ||    || '' .||  ||. '   ||' ||   ||   ||  ||   || ||")
+	println("'|.    ||  ||   ||  ||    || .|' ||  . '|..  ||  ||   ||   ||  ||    |''")
+	println(" ''|...'|   '|..|' .||...|'  '|..'|' |'..|' .||. ||. .||. .||. ||.  '||||.") 
+	println("                                                                   .|....'")
+	println()
 }
