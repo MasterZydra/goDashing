@@ -2,23 +2,49 @@
 # GoDashing
 
 **Contentlist**  
-- [Common](#common)
-	- [Key features](#key-features)
-- [Setting up project](#setting-up-project)
+- [Key features](#key-features)
+- [Dependencies](#dependencies)
+- [Getting started](#getting-started)
+- [Developer informations](#developer-informations)
+	- [Build the project](#build-the-project)
 
-# Common
-goDashing is [Golang](http://golang.org) based framework that lets you build beautiful dashboards.
-This project is a "fork" of the original project [shopify/dashing](http://shopify.github.io/dashing) and [gigablah/dashing-go](https://github.com/gigablah/dashing-go). This dashing project was created at Shopify for displaying custom dashboards on TVs around the office.
+GoDashing is a [Golang](http://golang.org) based port of the original project [shopify/dashing](http://shopify.github.io/dashing) and [gigablah/dashing-go](https://github.com/gigablah/dashing-go) that lets you build beautiful dashboards. This dashing project was created at Shopify for displaying custom dashboards on TVs around the office.
 
 ![example dashbaord](./docs/screenshot.png)
 
-## Key features
-- Works out of the box, no server, runtime or dependency requiered.
+# Key features
+- **Easy to setup**: It works without setting up a webserver. The server is contained in GoDashing itself. The necessary files get extracted on the first start of the program.
+
+# Dependencies
+For running successfully your system must have `PHP` installed.
+
+# Getting started
+1. Get the app here https://github.com/Hein-Software-Solutions/goDashing
+2. Start goDashing `$ ./goDashing`
+3. Go to http://127.0.0.1:8080
+
+**Note on macOS**  
+macOS requires to add the application to the Gatekeeper Approval. This can be done with the terminal:  
+`spctl --add /Path/To/Application.app` [OSXDaily](https://osxdaily.com/2015/07/15/add-remove-gatekeeper-app-command-line-mac-os-x)
+
+# Developer informations
+## Build the project
+To build the project in the terminal run the command  
+`> packr build -o ./goDashing ./cmd/godashing/...`.  
+Packr is a package used for including the necessary files into the binary itself.
+
+To build a version for every operating system the script `release.sh` can be executed. The version number is needed as argument:  
+e.g. `> ./release.sh v1.0.0`.  
+The binaries will be saved in the folder `release`.
+
+
+-------------------------------
+# TODO
+
 - Use premade widgets, or fully create your own with css, html, and js.
 - Pull Data from JIRA to your dashboard with a html attribute.
 - Schedule and execute any script/binary file to feed data to your dashboard.
 - Use the API to push data to your dashboards.
-
 
 # Setting up project
 - Download all dependencies: `go mod vendor`
