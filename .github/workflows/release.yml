@@ -21,6 +21,9 @@ jobs:
     - name: Download dependencies
       run: go mod vendor
 
+    - name: Install packr
+      run: go get -u github.com/gobuffalo/packr/packr
+
     - name: Execute script
       run: ./release.sh 
 
