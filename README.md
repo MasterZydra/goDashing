@@ -12,20 +12,23 @@ GoDashing is a [Golang](http://golang.org) based port of the original project [s
 
 ![example dashbaord](./docs/screenshot.png)
 
-# Key features
+## Key features
 - **Easy to setup**: It works without setting up a webserver. The server is contained in GoDashing itself. The necessary files get extracted on the first start of the program.
+- **Premade widgets**: The program already contains a small list of widgets (BarChart, graph, image, meter, PieChart, Sparkline, TwelveHourClock, comments, html, LineChart, myclock, PolarChart, switcher, DoughnutChart, iframe, list, number, RadarChart, text).  
+The list can be extended with you own creations using CSS, HTML and JS.
 
-# Dependencies
-For running successfully your system must have `PHP` installed.
+## Dependencies
+For running the jobs successfully your system must have `PHP` installed.
 
-# Getting started
-1. Get the app here https://github.com/Hein-Software-Solutions/goDashing
+## Getting started
+1. Get the app here https://github.com/Hein-Software-Solutions/goDashing/releases
 2. Start goDashing `$ ./goDashing`
 3. Go to http://127.0.0.1:8080
 
 **Note on macOS**  
 macOS requires to add the application to the Gatekeeper Approval. This can be done with the terminal:  
-`spctl --add /Path/To/Application.app` [OSXDaily](https://osxdaily.com/2015/07/15/add-remove-gatekeeper-app-command-line-mac-os-x)
+`spctl --add /Path/To/Application.app`  
+For more Details please visit [OSXDaily.com](https://osxdaily.com/2015/07/15/add-remove-gatekeeper-app-command-line-mac-os-x)
 
 # Developer informations
 ## Build the project
@@ -40,19 +43,12 @@ The binaries will be saved in the folder `release`.
 
 -------------------------------
 # TODO
-
-- Use premade widgets, or fully create your own with css, html, and js.
 - Pull Data from JIRA to your dashboard with a html attribute.
 - Schedule and execute any script/binary file to feed data to your dashboard.
 - Use the API to push data to your dashboards.
 
 # Setting up project
 - Download all dependencies: `go mod vendor`
-
-# Build the project
-- `packr build -o ./goDashing ./cmd/godashing/...`
-
---------------------------------------
 
 # Create a new dashboard
 create a name_here.gerb file in the ```dashboards``` folder
@@ -82,9 +78,6 @@ The output of the executed file should be a json representing the data to send t
 2. the token of the current running goDashing API
 3. 
 You can use this if you want to send data to multiple widgets. (see example)
-
-### PHP files
-When you add a php file to the ```job``` folder, goDashing will  assume ```php``` is available on your system, and will run it with it.
 
 ## HTTP call usage (dashing API)
 ```
