@@ -22,7 +22,7 @@ jobs:
       run: go mod vendor
 
     - name: Install packr
-      run: go get -u github.com/gobuffalo/packr/packr
+      run: go get github.com/gobuffalo/packr/packr
 
     - name: Execute script
       run: ./release.sh 
