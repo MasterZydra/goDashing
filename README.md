@@ -6,7 +6,9 @@
 - [Dependencies](#dependencies)
 - [Getting started](#getting-started)
 - [Developer informations](#developer-informations)
+	- [Setting up the project](#setting-up-the-project)
 	- [Build the project](#build-the-project)
+	- [Helpful converters](#helpful-converters)
 
 GoDashing is a [Golang](http://golang.org) based port of the original project [shopify/dashing](http://shopify.github.io/dashing) and [gigablah/dashing-go](https://github.com/gigablah/dashing-go) that lets you build beautiful dashboards. This dashing project was created at Shopify for displaying custom dashboards on TVs around the office.
 
@@ -31,24 +33,31 @@ macOS requires to add the application to the Gatekeeper Approval. This can be do
 For more Details please visit [OSXDaily.com](https://osxdaily.com/2015/07/15/add-remove-gatekeeper-app-command-line-mac-os-x)
 
 # Developer informations
+## Setting up the project
+1. Download the source code
+2. Download all dependencies:  
+`go mod vendor`
+3. Install packr for building the project:  
+`go get github.com/gobuffalo/packr/packr`
+
+
 ## Build the project
 To build the project in the terminal run the command  
 `> packr build -o ./goDashing ./cmd/godashing/...`.  
 Packr is a package used for including the necessary files into the binary itself.
 
-To build a version for every operating system the script `release.sh` can be executed. The version number is needed as argument:  
-e.g. `> ./release.sh v1.0.0`.  
-The binaries will be saved in the folder `release`.
+To build a version for every operating system the script *release* can be executed. The binaries will be saved in the folder *release*.  
+`> ./release.sh`
 
+## Helpful converters
+- CoffeeScript to JS: http://js2.coffee
+- SCSS to CSS: http://www.sassmeister.com
 
 -------------------------------
 # TODO
 - Pull Data from JIRA to your dashboard with a html attribute.
 - Schedule and execute any script/binary file to feed data to your dashboard.
 - Use the API to push data to your dashboards.
-
-# Setting up project
-- Download all dependencies: `go mod vendor`
 
 # Create a new dashboard
 create a name_here.gerb file in the ```dashboards``` folder
@@ -119,11 +128,6 @@ To add a custom widget "Test"
 goDashing will use them as soon as you set a widget with a ```data-view="Test"```
 
 Be sure to look at the [list of third party widgets][4].
-
-
-### COFFEESCRIPT ? SCSS ? JS ? CSS ?
-* convert coffeescript to js : http://js2.coffee
-* convert scss to css : http://www.sassmeister.com
 
 
 [2]: 
