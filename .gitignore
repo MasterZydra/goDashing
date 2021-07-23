@@ -9,3 +9,6 @@ vendor/
 
 # Packr
 a_main-packr.go
+
+# Test environment 
+testenv/
