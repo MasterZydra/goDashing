@@ -46,9 +46,9 @@ func main() {
 
 	printProgramName()
 	// Log area "startup"
-	log.Println("----------------------------------------")
-	log.Println("   Startup")
-	log.Println("----------------------------------------")
+	println("------------------------------------------------------------")
+	println("                       Startup")
+	println("------------------------------------------------------------")
 
 	// Extract assets from executable
 	ExtractAssets()
@@ -58,9 +58,9 @@ func main() {
 	println()
 	
 	// Log aread "running"
-	log.Println("----------------------------------------")
-	log.Println("  Running")
-	log.Println("----------------------------------------")
+	println("------------------------------------------------------------")
+	println("                      Running")
+	println("------------------------------------------------------------")
 
 	http.Handle("/", dash)
 	log.Fatal(http.ListenAndServe(":"+portStr, nil))
