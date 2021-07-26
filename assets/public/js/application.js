@@ -10068,8 +10068,8 @@ if (!Date.parse || "Date.parse is buggy") {
 
         // 15.9.1.15 Date Time String Format.
         var isoDateExpression = new RegExp("^" +
-            "(\\d{4}|[\+\-]\\d{6})" + // four-digit year capture or sign +
-                                      // 6-digit extended year
+            "(\\d{4}|[+-]\\d{6})" + // four-digit year capture or sign +
+                                    // 6-digit extended year
             "(?:-(\\d{2})" + // optional month capture
             "(?:-(\\d{2})" + // optional day capture
             "(?:" + // capture hours:minutes:seconds.milliseconds
