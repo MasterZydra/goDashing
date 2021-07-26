@@ -122,6 +122,9 @@ func (t *task) start(send chan *Event) {
 
 		data, err := doExec(command, args...)
 		if err != nil {
+			// Ignore error message if it could not connect do debugging client.
+			// Because disabling PHP is different for every version and setup,
+			// this suppresses the amount of repetitive error messages.
 			if strings.Contains(err.Error(), "Xdebug: [Step Debug] Could not connect to debugging client.") {
 				return
 			}
