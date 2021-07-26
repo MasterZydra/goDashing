@@ -3,6 +3,8 @@ package main
 import (
 	"flag"
 	"fmt"
+	"godashing"
+	"godashing/internal/utils"
 	"log"
 	"net/http"
 	"os"
@@ -17,6 +19,7 @@ func main() {
 	debug := flag.Bool("debugmode", false, "Debug mode for extended informations")
 	port := flag.Int("port", 8080, "Port the server is listening on")
 	webroot := flag.String("webroot", "", "root path for webserver")
+	log2file := flag.Bool("log2file", false, "Save log output into a file")
 	flag.Parse()
 	debugmode = *debug
 
@@ -44,6 +47,24 @@ func main() {
 		root = filepath.Clean(webrootEnv) + string(filepath.Separator)
 	}
 
+	if *log2file {
+		// Create path if it not exists
+		if ok, _ := utils.Exists(godashing.LogFileName); !ok {
+			utils.Create(godashing.LogFileName)
+		}
+
+		// Write log to file instead of console window
+		// Source: https://stackoverflow.com/questions/19965795/how-to-write-log-to-file
+		logFile, err := os.OpenFile("server.log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+		if err != nil {
+			log.Printf("%v", err)
+			return
+		}
+		log.SetOutput(logFile)
+		log.Println()
+		log.Println("--------------------------------------")
+	}
+
 	printProgramName()
 	// Log area "startup"
 	println("------------------------------------------------------------")
@@ -54,7 +75,8 @@ func main() {
 	ExtractAssets()
 
 	dash := NewDashing(root, portStr, os.Getenv("TOKEN")).Start()
-	log.Println("Listen on http://localhost:" + portStr)
+	println()
+	println("Listen on http://localhost:" + portStr)
 	println()
 	
 	// Log aread "running"
