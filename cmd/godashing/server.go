@@ -15,7 +15,6 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/gobuffalo/packr"
 	"github.com/clbanning/mxj"
 	"github.com/husobee/vestigo"
 	"gopkg.in/karlseguin/gerb.v0"
@@ -95,12 +94,11 @@ const (
 	locationFS
 )
 
-func (s *Server) fileGetContent(path string, boxName string) (string, int, error) {
+func (s *Server) fileGetContent(path string, assetName string) (string, int, error) {
 	var fileContent string
 	var err error
-	var box packr.Box
 
-	fullpath := filepath.Join(s.webroot, boxName, path)
+	fullpath := filepath.Join(s.webroot, assetName, path)
 
 	_, err = os.Stat(fullpath)
 	if err == nil {
@@ -114,27 +112,7 @@ func (s *Server) fileGetContent(path string, boxName string) (string, int, error
 		return fileContent, locationFS, nil
 	}
 
-	switch boxName {
-	case "public":
-		box = packr.NewBox("../../assets/public")
-	case "widgets":
-		box = packr.NewBox("../../assets/widgets")
-	case "dashboards":
-		box = packr.NewBox("../../assets/dashboards")
-	default:
-		panic("Unknow BOX")
-	}
-
-	if err != nil {
-		return "", locationBOX, fmt.Errorf("box %s not found : %s", boxName, err.Error())
-	}
-
-	fileContent, err = box.FindString(path)
-	if err != nil {
-		return "", locationBOX, fmt.Errorf("file %s not found in box %s : %s", path, boxName, err.Error())
-	}
-
-	return fileContent, locationBOX, err
+	return "", locationBOX, fmt.Errorf("file %s not found in asset %s : %s", path, assetName, err.Error())
 }
 
 // DashboardEventHandler accepts dashboard events.
@@ -194,11 +172,11 @@ func (s *Server) WidgetHandler(w http.ResponseWriter, r *http.Request) {
 	widget := param(r, "widget")
 	widget = widget[0 : len(widget)-5]
 
-	tplWidget, FSTYPE, err := s.fileGetContent(fmt.Sprintf("%s/%s.html", widget, widget), "widgets")
+	tplWidget, FSTYPE, err := s.fileGetContent(fmt.Sprintf("%s/%s.html", CamelCase(widget), CamelCase(widget)), "widgets")
 
 	if err != nil {
 		// log.Printf("%v", err)
-		widget = CamelCase(widget)
+		widget = strings.ToLower(widget)
 		tplWidget, FSTYPE, err = s.fileGetContent(fmt.Sprintf("%s/%s.html", widget, widget), "widgets")
 		if err != nil {
 			log.Printf("404 - %s - %s\n", "widgets", fmt.Sprintf("%s/%s.html", widget, widget))
@@ -222,21 +200,10 @@ func (s *Server) WidgetHandler(w http.ResponseWriter, r *http.Request) {
 	template.Render(w, nil)
 }
 
-func stringInSlice(a string, list []string) bool {
-	for _, b := range list {
-		if b == a {
-			return true
-		}
-	}
-	return false
-}
-
 // WidgetsJSHandler serves widget templates.
 func (s *Server) WidgetsJSHandler(w http.ResponseWriter, r *http.Request) {
-
 	w.Header().Set("Content-Type", "application/javascript; charset=UTF-8")
 
-	//Disk
 	files, _ := filepath.Glob(s.webroot + "widgets/*/*.js")
 	for _, file := range files {
 		content, err := ioutil.ReadFile(file)
@@ -247,24 +214,12 @@ func (s *Server) WidgetsJSHandler(w http.ResponseWriter, r *http.Request) {
 		w.Write(content)
 		w.Write([]byte("\n\n\n"))
 	}
-
-	//BOX
-	jobbox := packr.NewBox("../../assets/widgets")
-	jobbox.Walk(func(path string, f packr.File) error {
-		content, _ := jobbox.FindString(path)
-		if filepath.Ext(path) == ".js" && !stringInSlice(s.webroot+"widgets/"+path, files) {
-			w.Write([]byte(content))
-			w.Write([]byte("\n\n\n"))
-		}
-		return nil
-	})
-
 }
 
 func (s *Server) WidgetsCSSHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/css; charset=UTF-8")
 
-	//Disk
+	// TODO Extract logic WidgetsCSSHandler and WidgetsJSHandler in one func to remove redundance
 	files, _ := filepath.Glob(s.webroot + "widgets/*/*.css")
 	for _, file := range files {
 		content, err := ioutil.ReadFile(file)
@@ -275,17 +230,6 @@ func (s *Server) WidgetsCSSHandler(w http.ResponseWriter, r *http.Request) {
 		w.Write(content)
 		w.Write([]byte("\n\n\n"))
 	}
-
-	//BOX
-	jobbox := packr.NewBox("../../assets/widgets")
-	jobbox.Walk(func(path string, f packr.File) error {
-		content, _ := jobbox.FindString(path)
-		if filepath.Ext(path) == ".css" && !stringInSlice(s.webroot+"widgets/"+path, files) {
-			w.Write([]byte(content))
-			w.Write([]byte("\n\n\n"))
-		}
-		return nil
-	})
 }
 
 func (s *Server) StaticHandler(w http.ResponseWriter, r *http.Request) {
