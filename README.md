@@ -10,6 +10,9 @@
 	- [Build the project](#build-the-project)
 	- [Helpful converters](#helpful-converters)
 
+**Links**  
+- [Code description](./docs/code/README.md)
+
 GoDashing is a [Golang](http://golang.org) based port of the original project [shopify/dashing](http://shopify.github.io/dashing) and [gigablah/dashing-go](https://github.com/gigablah/dashing-go) that lets you build beautiful dashboards. This dashing project was created at Shopify for displaying custom dashboards on TVs around the office.
 
 ![example dashbaord](./docs/screenshot.png)
@@ -39,7 +42,6 @@ For more Details please visit [OSXDaily.com](https://osxdaily.com/2015/07/15/add
 `go mod vendor`
 3. Install packr for building the project:  
 `go get github.com/gobuffalo/packr/packr`
-
 
 ## Build the project
 To build the project in the terminal run the command  
