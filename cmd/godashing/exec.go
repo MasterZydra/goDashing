@@ -14,7 +14,7 @@ import (
 	"github.com/fsnotify/fsnotify"
 
 	"github.com/carlescere/scheduler"
-	"github.com/streamrail/concurrent-map"
+	"github.com/orcaman/concurrent-map"
 )
 
 type execJob struct {
