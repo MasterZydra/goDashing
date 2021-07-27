@@ -8,6 +8,7 @@
 - [Developer informations](#developer-informations)
 	- [Setting up the project](#setting-up-the-project)
 	- [Build the project](#build-the-project)
+	- [Add your own widgets](#add-your-own-widgets)
 	- [Helpful converters](#helpful-converters)
 
 **Links**  
@@ -50,6 +51,18 @@ Packr is a package used for including the necessary files into the binary itself
 
 To build a version for every operating system the script *release* can be executed. The binaries will be saved in the folder *release*.  
 `> ./release.sh`
+
+# Add your own widgets
+To add a custom widget add the folder with the widget name in the `widgets` folder.
+The following file extensions will be delivered by goDashing: `.css`, `.html`, `.js`
+goDashing will use them as soon as you set a widget with a ```data-view="<YourWidgetName>"```
+
+**Important hint:** Widget names are *case sensitive*!
+
+A list of third party widgets for the original Shopify dashing is linked [here](https://github.com/Shopify/dashing/wiki/Additional-Widgets).  
+Some porting is required. Helpful converters are listed in the section [Helpful converters](#helpful-converters).
+
+If you have successfully ported a widget or created a new widget, please consider to create a pull request to add it to the default widgets.
 
 ## Helpful converters
 - CoffeeScript to JS: http://js2.coffee
@@ -117,21 +130,3 @@ password =  ""
 interval = 30
 ```
 
-
-# Use your custom assets, widgets...
-* goDashing looks for assets in a ```public``` folder, when it can not found a file in this folder, it will use its embeded one.
-
-## Widgets
-To add a custom widget "Test"
-* create a ```widgets``` folder in working directory
-	* create a ```Test``` folder
-		* add the ```Test.js```, ```Test.html```, ```Test.css``` files in it.
-
-goDashing will use them as soon as you set a widget with a ```data-view="Test"```
-
-Be sure to look at the [list of third party widgets][4].
-
-
-[2]: 
-[3]: 
-[4]: https://github.com/Shopify/dashing/wiki/Additional-Widgets
