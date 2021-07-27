@@ -11,7 +11,7 @@
 	- [Helpful converters](#helpful-converters)
 
 **Links**  
-- [Code description](./docs/code/README.md)
+- [Source code annotations](./docs/code/README.md)
 
 GoDashing is a [Golang](http://golang.org) based port of the original project [shopify/dashing](http://shopify.github.io/dashing) and [gigablah/dashing-go](https://github.com/gigablah/dashing-go) that lets you build beautiful dashboards. This dashing project was created at Shopify for displaying custom dashboards on TVs around the office.
 
