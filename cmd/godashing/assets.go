@@ -10,6 +10,10 @@ import (
 	"github.com/gobuffalo/packr"
 )
 
+// All files in the folder "assets" will be embedded to the binary file while
+// compiling because of the usage of "packr.NewBox(...)" in the following lines.
+// When this function is executed all embedded files will be extracted an stored
+// in the current working directory.
 func ExtractAssets() {
 	extractAsset(packr.NewBox("../../assets/dashboards"))
 	extractAsset(packr.NewBox("../../assets/jobs"))
@@ -17,6 +21,9 @@ func ExtractAssets() {
 	extractAsset(packr.NewBox("../../assets/widgets"))
 }
 
+// Extract all files in the given box to the current working directory and
+// recreate the path given in the box.
+// If the base folder (e.g. widgets) already exists, the box will be skipped.
 func extractAsset(jobbox packr.Box) {
 	// Extract folder name from path
 	var assetPath = filepath.Base(jobbox.Path)
