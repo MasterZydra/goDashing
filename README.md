@@ -16,6 +16,48 @@
 
 GoDashing is a [Golang](http://golang.org) based port of the original project [shopify/dashing](http://shopify.github.io/dashing) and [gigablah/dashing-go](https://github.com/gigablah/dashing-go) that lets you build beautiful dashboards. This dashing project was created at Shopify for displaying custom dashboards on TVs around the office.
 
+```
+> ./goDashing_darwin_amd64
+
+ ..|'''.|          '||''|.                  '||       ||
+.|'     '    ...    ||   ||   ....    ....   || ..   ...  .. ...     ... .
+||    .... .|  '|.  ||    || '' .||  ||. '   ||' ||   ||   ||  ||   || ||
+'|.    ||  ||   ||  ||    || .|' ||  . '|..  ||  ||   ||   ||  ||    |''
+ ''|...'|   '|..|' .||...|'  '|..'|' |'..|' .||. ||. .||. .||. ||.  '||||.
+                                                                   .|....'
+
+------------------------------------------------------------
+                       Startup
+------------------------------------------------------------
+2021/07/28 00:03:59 Check for asset folder 'dashboards'
+2021/07/28 00:03:59 Extract asset folder 'dashboards'
+2021/07/28 00:03:59 Check for asset folder 'jobs'
+2021/07/28 00:03:59 Extract asset folder 'jobs'
+2021/07/28 00:03:59 Check for asset folder 'public'
+2021/07/28 00:03:59 Extract asset folder 'public'
+2021/07/28 00:03:59 Check for asset folder 'widgets'
+2021/07/28 00:03:59 Extract asset folder 'widgets'
+
+Listen on http://localhost:8080
+
+------------------------------------------------------------
+                      Running
+------------------------------------------------------------
+2021/07/28 00:03:59 JiraJob : can not read config file conf/jiraissuecount.ini
+2021/07/28 00:03:59 ExecJob - 1_doughnutchart.php - scheduled every 1s
+2021/07/28 00:03:59 ExecJob - 1_linechart.php - scheduled every 1s
+2021/07/28 00:03:59 ExecJob - 1_water_main_city.php - scheduled every 1s
+2021/07/28 00:03:59 ExecJob - 2_valuation.php - scheduled every 2s
+2021/07/28 00:03:59 ExecJob - 3_buzzwords.php - scheduled every 3s
+2021/07/28 00:03:59 ExecJob - 4_barchart.php - scheduled every 4s
+2021/07/28 00:03:59 ExecJob - 5_convergence.php - scheduled every 5s
+2021/07/28 00:03:59 ExecJob - 5_piechart.php - scheduled every 5s
+2021/07/28 00:03:59 ExecJob - 5_polarchart.php - scheduled every 5s
+2021/07/28 00:03:59 ExecJob - 5_radarchart.php - scheduled every 5s
+2021/07/28 00:03:59 ExecJob - 5_sampleTXT.php - scheduled every 5s
+2021/07/28 00:03:59 ExecJob - 5_web-update.php - scheduled every 5s
+```
+
 ![example dashbaord](./docs/screenshot.png)
 
 ## Key features
