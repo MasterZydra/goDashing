@@ -82,7 +82,9 @@ func (s *Server) EventsHandler(w http.ResponseWriter, r *http.Request) {
 			fmt.Fprintf(w, "data: %s\n\n", json)
 			f.Flush()
 		case <-closer:
-			// log.Println("Closing connection")
+			if debugmode {
+				log.Println("Closing connection")
+			}
 			return
 		}
 	}
@@ -107,7 +109,6 @@ func (s *Server) fileGetContent(path string, assetName string) (string, int, err
 		if err != nil {
 			return "", locationFS, fmt.Errorf("error while reading file %s: %s", fullpath, err.Error())
 		}
-		// log.Printf("(FS) %s", fullpath)
 		fileContent = string(fileContentByte)
 		return fileContent, locationFS, nil
 	}
@@ -175,7 +176,6 @@ func (s *Server) WidgetHandler(w http.ResponseWriter, r *http.Request) {
 	tplWidget, FSTYPE, err := s.fileGetContent(fmt.Sprintf("%s/%s.html", CamelCase(widget), CamelCase(widget)), "widgets")
 
 	if err != nil {
-		// log.Printf("%v", err)
 		widget = strings.ToLower(widget)
 		tplWidget, FSTYPE, err = s.fileGetContent(fmt.Sprintf("%s/%s.html", widget, widget), "widgets")
 		if err != nil {

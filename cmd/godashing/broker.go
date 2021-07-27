@@ -1,5 +1,7 @@
 package main
 
+import "log"
+
 // An eventCache stores the latest event for each key, so that new clients can
 // catch up.
 type eventCache map[string]*Event
@@ -38,16 +40,19 @@ func (b *Broker) Start() {
 				b.clients[s] = true
 				// Send all the cached events so that when a new client connects, it
 				// doesn't miss previous events
-				//log.Println("sending cache")
+				if debugmode {
+					log.Println("Added new client and sending cached events")
+				}
 				for _, e := range b.cache {
 					s <- e
 				}
-				//log.Println("Added new client")
 			case s := <-b.defunctClients:
 				// A client has detached and we want to
 				// stop sending them events.
 				delete(b.clients, s)
-				//log.Println("Removed client")
+				if debugmode {
+					log.Println("Removed client")
+				}
 			case event := <-b.events:
 				b.cache[event.ID] = event
 				// There is a new event to send. For each
@@ -56,7 +61,9 @@ func (b *Broker) Start() {
 				for s := range b.clients {
 					s <- event
 				}
-				//log.Printf("Broadcast event to %d clients", len(b.clients))
+				if debugmode {
+					log.Printf("Broadcast event to %d clients\n", len(b.clients))
+				}
 			}
 		}
 	}()
