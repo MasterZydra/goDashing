@@ -115,6 +115,7 @@ If you have successfully ported a widget or created a new widget, please conside
 https://github.com/es-shims  
 https://jquery.com/download/  
 https://github.com/aterrien/jQuery-Knob  
+https://github.com/ducksboard/gridster.js  
 https://github.com/shutterstock/rickshaw
 
 -------------------------------
