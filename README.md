@@ -94,7 +94,7 @@ Packr is a package used for including the necessary files into the binary itself
 To build a version for every operating system the script *release* can be executed. The binaries will be saved in the folder *release*.  
 `> ./release.sh`
 
-# Add your own widgets
+## Add your own widgets
 To add a custom widget add the folder with the widget name in the `widgets` folder.
 The following file extensions will be delivered by goDashing: `.css`, `.html`, `.js`
 goDashing will use them as soon as you set a widget with a ```data-view="<YourWidgetName>"```
@@ -109,6 +109,11 @@ If you have successfully ported a widget or created a new widget, please conside
 ## Helpful converters
 - CoffeeScript to JS: http://js2.coffee
 - SCSS to CSS: http://www.sassmeister.com
+
+## Used dependencies
+**JavaScript**  
+https://github.com/es-shims  
+https://jquery.com/download/
 
 -------------------------------
 # TODO
