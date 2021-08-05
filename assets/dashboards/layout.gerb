@@ -15,6 +15,7 @@
   <script type="text/javascript" src="/public/js/jQuery.min.js"></script>
   <script type="text/javascript" src="/public/js/es5-shim.min.js"></script>
   <script type="text/javascript" src="/public/js/jQuery.knob.js"></script>
+  <script type="text/javascript" src="/public/js/rickshaw.js"></script>
   <script type="text/javascript" src="/public/js/application.js"></script>
   
   <link rel="stylesheet" href="/public/css/application.css" />
