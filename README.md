@@ -113,7 +113,8 @@ If you have successfully ported a widget or created a new widget, please conside
 ## Used dependencies
 **JavaScript**  
 https://github.com/es-shims  
-https://jquery.com/download/
+https://jquery.com/download/  
+https://github.com/aterrien/jQuery-Knob
 
 -------------------------------
 # TODO
