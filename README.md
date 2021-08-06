@@ -12,6 +12,7 @@
 	- [Build the project](#build-the-project)
 	- [Add your own widgets](#add-your-own-widgets)
 	- [Helpful converters](#helpful-converters)
+	- [Used dependencies](#used-dependencies)
 
 **Links**  
 - [Source code annotations](./docs/code/README.md)
