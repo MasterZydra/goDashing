@@ -16,8 +16,8 @@
   <script type="text/javascript" src="/public/js/es5-shim.min.js"></script>
   <script type="text/javascript" src="/public/js/jQuery.gridster.js"></script>
   <script type="text/javascript" src="/public/js/jQuery.knob.js"></script>
-  <script type="text/javascript" src="/public/js/d3.js"></script>
-  <script type="text/javascript" src="/public/js/rickshaw.js"></script>
+  <script type="text/javascript" src="/public/js/d3.min.js"></script>
+  <script type="text/javascript" src="/public/js/rickshaw.min.js"></script>
   <script type="text/javascript" src="/public/js/batman.js"></script>
   <script type="text/javascript" src="/public/js/application.js"></script>
   
