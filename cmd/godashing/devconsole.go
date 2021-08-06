@@ -21,11 +21,13 @@ func devConsole() {
 				debugmode = true
 				printDebugModeState()
 			} else if tmp == "=false" {
-				debugmode = true
+				debugmode = false
 				printDebugModeState()
 			} else {
 				println("-> Invalid input. See in 'help'")
 			}
+		} else if input == "exit" {
+			os.Exit(0)
 		} else {
 			printDevConsoleHelp()
 		}
@@ -50,5 +52,7 @@ func printDevConsoleHelp() {
 	println("  debugmode          // Show the current state")
 	println("  debugmode=true     // Enable debug mode")
 	println("  debugmode=false    // Disable debug mode")
+	println("- exit:")
+	println("  exit               // Shut down server")
 	println("----------------------------------")
 }
