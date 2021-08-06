@@ -101,7 +101,7 @@ func (s *Server) fileGetContent(path string, assetName string) (string, int, err
 	var err error
 
 	fullpath := filepath.Join(s.webroot, assetName, path)
-
+	
 	_, err = os.Stat(fullpath)
 	if err == nil {
 		var fileContentByte []byte
@@ -109,6 +109,11 @@ func (s *Server) fileGetContent(path string, assetName string) (string, int, err
 		if err != nil {
 			return "", locationFS, fmt.Errorf("error while reading file %s: %s", fullpath, err.Error())
 		}
+
+		if debugmode {
+			log.Println("Serve file: " + fullpath)
+		}
+
 		fileContent = string(fileContentByte)
 		return fileContent, locationFS, nil
 	}
