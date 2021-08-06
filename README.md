@@ -5,7 +5,9 @@
 - [Key features](#key-features)
 - [Dependencies](#dependencies)
 - [Getting started](#getting-started)
+- [Flags](#flags)
 - [Developer informations](#developer-informations)
+	- [Developer console](#developer-console)
 	- [Setting up the project](#setting-up-the-project)
 	- [Build the project](#build-the-project)
 	- [Add your own widgets](#add-your-own-widgets)
@@ -31,31 +33,16 @@ GoDashing is a [Golang](http://golang.org) based port of the original project [s
 ------------------------------------------------------------
 2021/07/28 00:03:59 Check for asset folder 'dashboards'
 2021/07/28 00:03:59 Extract asset folder 'dashboards'
-2021/07/28 00:03:59 Check for asset folder 'jobs'
-2021/07/28 00:03:59 Extract asset folder 'jobs'
-2021/07/28 00:03:59 Check for asset folder 'public'
-2021/07/28 00:03:59 Extract asset folder 'public'
-2021/07/28 00:03:59 Check for asset folder 'widgets'
-2021/07/28 00:03:59 Extract asset folder 'widgets'
+...
 
 Listen on http://localhost:8080
 
 ------------------------------------------------------------
                       Running
 ------------------------------------------------------------
-2021/07/28 00:03:59 JiraJob : can not read config file conf/jiraissuecount.ini
-2021/07/28 00:03:59 ExecJob - 1_doughnutchart.php - scheduled every 1s
-2021/07/28 00:03:59 ExecJob - 1_linechart.php - scheduled every 1s
 2021/07/28 00:03:59 ExecJob - 1_water_main_city.php - scheduled every 1s
 2021/07/28 00:03:59 ExecJob - 2_valuation.php - scheduled every 2s
-2021/07/28 00:03:59 ExecJob - 3_buzzwords.php - scheduled every 3s
-2021/07/28 00:03:59 ExecJob - 4_barchart.php - scheduled every 4s
-2021/07/28 00:03:59 ExecJob - 5_convergence.php - scheduled every 5s
-2021/07/28 00:03:59 ExecJob - 5_piechart.php - scheduled every 5s
-2021/07/28 00:03:59 ExecJob - 5_polarchart.php - scheduled every 5s
-2021/07/28 00:03:59 ExecJob - 5_radarchart.php - scheduled every 5s
-2021/07/28 00:03:59 ExecJob - 5_sampleTXT.php - scheduled every 5s
-2021/07/28 00:03:59 ExecJob - 5_web-update.php - scheduled every 5s
+...
 ```
 
 ![example dashbaord](./docs/screenshot.png)
@@ -78,7 +65,40 @@ macOS requires to add the application to the Gatekeeper Approval. This can be do
 `spctl --add /Path/To/Application.app`  
 For more Details please visit [OSXDaily.com](https://osxdaily.com/2015/07/15/add-remove-gatekeeper-app-command-line-mac-os-x)
 
+## Flags
+The executable can be called with a few flags. To see all flags call the application with the flag `-help`.  
+```
+> ./goDashing -help
+Usage of ./goDashing:
+  -debugmode
+        Debug mode for extended informations
+  -log2file
+        Save log output into a file
+  -port int
+        Port the server is listening on (default 8080)
+  -webroot string
+        root path for webserver
+```
+
+The debugmode can be enabled with `-debugmode=true` or using the [developer console](#developer-console).
+
 # Developer informations
+## Developer console
+The developer console can be used by typing in the terminal window. This can be used to change settings for example the debug mode at run time.
+
+By typing some invalid input or 'help' the manual will be displayed:
+```
+----------------------------------
+Developer console
+-----------------
+Commands:
+- debugmode:
+  debugmode          // Show the current state
+  debugmode=true     // Enable debug mode
+  debugmode=false    // Disable debug mode
+----------------------------------
+```
+
 ## Setting up the project
 1. Download the source code
 2. Download all dependencies:  
