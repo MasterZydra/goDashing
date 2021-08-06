@@ -8,6 +8,7 @@
 - [Settings](#settings)
 	- [Environment variables](#environment-variables)
 	- [Flags](#flags)
+- [Dashing API](#dashing-api)
 - [Developer informations](#developer-informations)
 	- [Developer console](#developer-console)
 	- [Setting up the project](#setting-up-the-project)
@@ -94,8 +95,19 @@ Usage of ./goDashing:
 
 The debugmode can be enabled with `-debugmode=true` or using the [developer console](#developer-console).
 
-# Developer informations
-## Developer console
+## Dashing API
+The dashing API can be used to send data to the widgets:
+```
+curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "text": "Hey, Look what I can do!" } http://YOUR_IP:YOUR_PORT/widgets/YOUR_WIDGET_ID
+```
+
+For example:
+```
+curl -d '{ "auth_token": "", "text": "Hey, Look what I can do!" }' http://localhost:8080/widgets/welcome
+```
+
+## Developer informations
+### Developer console
 The developer console can be used by typing in the terminal window. This can be used to change settings for example the debug mode at run time.
 
 By typing some invalid input or 'help' the manual will be displayed:
@@ -111,14 +123,14 @@ Commands:
 ----------------------------------
 ```
 
-## Setting up the project
+### Setting up the project
 1. Download the source code
 2. Download all dependencies:  
 `go mod vendor`
 3. Install packr for building the project:  
 `go get github.com/gobuffalo/packr/packr`
 
-## Build the project
+### Build the project
 To build the project in the terminal run the command  
 `> packr build -o ./goDashing ./cmd/godashing/...`.  
 Packr is a package used for including the necessary files into the binary itself.
@@ -126,10 +138,10 @@ Packr is a package used for including the necessary files into the binary itself
 To build a version for every operating system the script *release* can be executed. The binaries will be saved in the folder *release*.  
 `> ./release.sh`
 
-## Add your own widgets
-To add a custom widget add the folder with the widget name in the `widgets` folder.
+### Add your own widgets
+To add a custom widget add the folder with the widget name in the `widgets` folder. All the files in the folder must have the same name as the folder with the supported file extensions.  
 The following file extensions will be delivered by goDashing: `.css`, `.html`, `.js`
-goDashing will use them as soon as you set a widget with a ```data-view="<YourWidgetName>"```
+goDashing will use them as soon as you add a widget in the gerb file of a dashboard with a ```data-view="<YourWidgetName>"```
 
 **Important hint:** Widget names are *case sensitive*!
 
@@ -138,11 +150,11 @@ Some porting is required. Helpful converters are listed in the section [Helpful 
 
 If you have successfully ported a widget or created a new widget, please consider to create a pull request to add it to the default widgets.
 
-## Helpful converters
+### Helpful converters
 - CoffeeScript to JS: http://js2.coffee
 - SCSS to CSS: http://www.sassmeister.com
 
-## Used dependencies
+### Used dependencies
 **JavaScript**  
 https://github.com/es-shims  
 https://jquery.com/download/  
@@ -186,13 +198,6 @@ The output of the executed file should be a json representing the data to send t
 2. the token of the current running goDashing API
 3. 
 You can use this if you want to send data to multiple widgets. (see example)
-
-## HTTP call usage (dashing API)
-```
-curl -d '{ "auth_token": "YOUR_AUTH_TOKEN", "text": "Hey, Look what I can do!" } http://127.0.0.1:8080/widgets/YOUR_WIDGET_ID
-```
-
-
 ## JIRA Jql and filters
 Edit your .gerb dashboard to add jira attributes to your widget :
 
