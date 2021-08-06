@@ -15,6 +15,7 @@ env GOOS=$os GOARCH=$arch packr build -ldflags="-s -w -X main.version=${1} -X ma
 tar czfv $product.tgz $product
 rm $product
 mv $product.tgz ${releaseFolder}/
+echo -\> $product build and zipped
 
 arch=arm
 os=linux
@@ -23,6 +24,7 @@ env GOOS=$os GOARCH=$arch packr build -ldflags="-s -w -X main.version=${1} -X ma
 tar czfv $product.tgz $product
 rm $product
 mv $product.tgz ${releaseFolder}/
+echo -\> $product build and zipped
 
 arch=amd64
 os=linux
@@ -31,6 +33,7 @@ env GOOS=$os GOARCH=$arch packr build -ldflags="-s -w -X main.version=${1} -X ma
 tar czfv $product.tgz $product
 rm $product
 mv $product.tgz ${releaseFolder}/
+echo -\> $product build and zipped
 
 arch=386
 os=linux
@@ -39,6 +42,7 @@ env GOOS=$os GOARCH=$arch packr build -ldflags="-s -w -X main.version=${1} -X ma
 tar czfv $product.tgz $product
 rm $product
 mv $product.tgz ${releaseFolder}/
+echo -\> $product build and zipped
 
 arch=386
 os=windows
@@ -47,6 +51,7 @@ env GOOS=$os GOARCH=$arch packr build -ldflags="-s -w -X main.version=${1} -X ma
 zip -r ${product}.zip ${product}.exe
 rm $product.exe
 mv $product.zip ${releaseFolder}/
+echo -\> $product build and zipped
 
 arch=amd64
 os=windows
@@ -55,3 +60,4 @@ env GOOS=$os GOARCH=$arch packr build -ldflags="-s -w -X main.version=${1} -X ma
 zip -r ${product}.zip ${product}.exe
 rm $product.exe
 mv $product.zip ${releaseFolder}/
+echo -\> $product build and zipped
