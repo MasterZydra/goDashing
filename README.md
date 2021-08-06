@@ -5,7 +5,9 @@
 - [Key features](#key-features)
 - [Dependencies](#dependencies)
 - [Getting started](#getting-started)
-- [Flags](#flags)
+- [Settings](#settings)
+	- [Environment variables](#environment-variables)
+	- [Flags](#flags)
 - [Developer informations](#developer-informations)
 	- [Developer console](#developer-console)
 	- [Setting up the project](#setting-up-the-project)
@@ -17,7 +19,7 @@
 **Links**  
 - [Source code annotations](./docs/code/README.md)
 
-GoDashing is a [Golang](http://golang.org) based port of the original project [shopify/dashing](http://shopify.github.io/dashing) and [gigablah/dashing-go](https://github.com/gigablah/dashing-go) that lets you build beautiful dashboards. This dashing project was created at Shopify for displaying custom dashboards on TVs around the office.
+GoDashing is a fork of [vjeantet/goDashing](https://github.com/vjeantet/goDashing). It is a [Golang](http://golang.org) based port of the original project [shopify/dashing](http://shopify.github.io/dashing) and [gigablah/dashing-go](https://github.com/gigablah/dashing-go) that lets you build beautiful dashboards. This dashing project was created at Shopify for displaying custom dashboards on TVs around the office.
 
 ```
 > ./goDashing_darwin_amd64
@@ -66,7 +68,16 @@ macOS requires to add the application to the Gatekeeper Approval. This can be do
 `spctl --add /Path/To/Application.app`  
 For more Details please visit [OSXDaily.com](https://osxdaily.com/2015/07/15/add-remove-gatekeeper-app-command-line-mac-os-x)
 
-## Flags
+## Settings
+### Environment variables
+The value of the environment variables overwrites the values given by the [flags](#flags). The variable names are:
+- `PORT` - Port the server is listening on (default 8080)
+- `WEBROOT` - Root path for the webserver
+- `TOKEN` - Token for the API (default is empty)
+
+On Linux this can be done with the command `export`. E.g. `export PORT=8081`.
+
+### Flags
 The executable can be called with a few flags. To see all flags call the application with the flag `-help`.  
 ```
 > ./goDashing -help
