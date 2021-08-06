@@ -116,6 +116,7 @@ https://github.com/es-shims
 https://jquery.com/download/  
 https://github.com/aterrien/jQuery-Knob  
 https://github.com/ducksboard/gridster.js  
+https://d3js.org  
 https://github.com/shutterstock/rickshaw
 
 -------------------------------
