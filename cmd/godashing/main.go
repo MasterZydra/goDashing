@@ -84,6 +84,8 @@ func main() {
 	println("                      Running")
 	println("------------------------------------------------------------")
 
+	go devConsole()
+
 	http.Handle("/", dash)
 	log.Fatal(http.ListenAndServe(":"+portStr, nil))
 }
