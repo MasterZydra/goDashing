@@ -3,7 +3,7 @@ module godashing
 go 1.16
 
 require (
-	github.com/BurntSushi/toml v0.3.1
+	github.com/BurntSushi/toml v0.4.1
 	github.com/PuerkitoBio/goquery v1.7.1
 	github.com/andygrunwald/go-jira v1.14.0
 	github.com/carlescere/scheduler v0.0.0-20170109141437-ee74d2f83d82
