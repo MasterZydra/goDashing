@@ -2,9 +2,7 @@ name: Go
 
 on:
   push:
-    paths:
-      - '**.js'
-      - '**.go'
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
