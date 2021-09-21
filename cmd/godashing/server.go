@@ -100,6 +100,10 @@ func (s *Server) fileGetContent(path string, assetName string) (string, int, err
 	var fileContent string
 	var err error
 
+	if strings.Contains(path, "..") || strings.Contains(assetName, "..") {
+		return "", -1, nil
+	}
+
 	fullpath := filepath.Join(s.webroot, assetName, path)
 
 	_, err = os.Stat(fullpath)
