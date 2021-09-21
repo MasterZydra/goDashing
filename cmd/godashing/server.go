@@ -101,7 +101,7 @@ func (s *Server) fileGetContent(path string, assetName string) (string, int, err
 	var err error
 
 	fullpath := filepath.Join(s.webroot, assetName, path)
-	
+
 	_, err = os.Stat(fullpath)
 	if err == nil {
 		var fileContentByte []byte
@@ -283,6 +283,11 @@ func (s *Server) DashboardHandler(w http.ResponseWriter, r *http.Request) {
 		folder = folder + "/"
 	}
 	dashboardpath := folder + dashboard
+
+	if strings.Contains(dashboardpath, ".") {
+		http.NotFound(w, r)
+		return
+	}
 
 	tplDashboard, _, err = s.fileGetContent(fmt.Sprintf("%s.gerb", dashboardpath), "dashboards")
 	if err != nil {
