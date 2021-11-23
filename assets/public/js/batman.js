@@ -8701,10 +8701,10 @@
           return;
         }
         if (after === '') {
-          params[k] = v;
+          params.set(k, v);
         } else if (after === '[]') {
           if ((_ref = params[k]) == null) {
-            params[k] = [];
+            params.set(k, []);
           }
           if (Batman.typeOf(params[k]) !== 'Array') {
             throw new Error("expected Array (got " + (Batman.typeOf(params[k])) + ") for param \"" + k + "\"");
@@ -8713,7 +8713,7 @@
         } else if (matches = after.match(childKeyMatchers[0]) || after.match(childKeyMatchers[1])) {
           childKey = matches[1];
           if ((_ref1 = params[k]) == null) {
-            params[k] = [];
+            params.set(k, []);
           }
           if (Batman.typeOf(params[k]) !== 'Array') {
             throw new Error("expected Array (got " + (Batman.typeOf(params[k])) + ") for param \"" + k + "\"");
@@ -8726,12 +8726,12 @@
           }
         } else {
           if ((_ref2 = params[k]) == null) {
-            params[k] = {};
+            params.set(k, {});
           }
           if (Batman.typeOf(params[k]) !== 'Object') {
             throw new Error("expected Object (got " + (Batman.typeOf(params[k])) + ") for param \"" + k + "\"");
           }
-          params[k] = normalizeParams(params[k], after, v);
+          params.set(k, normalizeParams(params[k], after, v));
         }
         return params;
       };
