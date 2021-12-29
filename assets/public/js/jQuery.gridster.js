@@ -501,7 +501,7 @@
       this.options = $.extend({}, defaults, options);
       this.$document = $(document);
       this.$container = $(el);
-      this.$dragitems = $(this.options.items, this.$container);
+      this.$dragitems = jQuery.find(this.options.items, this.$container);
       this.is_dragging = false;
       this.player_min_left = 0 + this.options.offset_left;
       this.id = uniqId();
@@ -1277,7 +1277,7 @@
     */
     fn.add_resize_handle = function($w) {
         var append_to = this.options.resize.handle_append_to;
-        $(this.resize_handle_tpl).appendTo( append_to ? $(append_to, $w) : $w);
+        $(this.resize_handle_tpl).appendTo( append_to ? jQuery.find(append_to, $w) : $w);
 
         return this;
     };
