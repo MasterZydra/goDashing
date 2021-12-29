@@ -28,9 +28,6 @@ type Server struct {
 }
 
 func param(r *http.Request, name string) string {
-	// vars := mux.Vars(r)
-	// value := vars[name]
-	// return value
 	return r.FormValue(fmt.Sprintf(":%s", name))
 }
 
