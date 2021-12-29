@@ -21,6 +21,21 @@ func TestEscapeString(t *testing.T) {
 			args: args{input: "Test with one \r"},
 			want: "Test with one ",
 		},
+		{
+			name: "Four \\n",
+			args: args{input: "\nTest \nwith \none \n"},
+			want: "Test with one ",
+		},
+		{
+			name: "Four \\r",
+			args: args{input: "\rTest \rwith \rone \r"},
+			want: "Test with one ",
+		},
+		{
+			name: "HTML",
+			args: args{input: "<a></a>"},
+			want: "&lt;a&gt;&lt;/a&gt;",
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
