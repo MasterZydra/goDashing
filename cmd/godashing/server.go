@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"godashing/internal/utils"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -112,7 +113,7 @@ func (s *Server) fileGetContent(path string, assetName string) (string, int, err
 		}
 
 		if debugmode {
-			log.Println("Serve file: " + fullpath)
+			log.Println("Serve file: " + utils.EscapeString(fullpath))
 		}
 
 		fileContent = string(fileContentByte)
@@ -185,7 +186,7 @@ func (s *Server) WidgetHandler(w http.ResponseWriter, r *http.Request) {
 		widget = strings.ToLower(widget)
 		tplWidget, FSTYPE, err = s.fileGetContent(fmt.Sprintf("%s/%s.html", widget, widget), "widgets")
 		if err != nil {
-			log.Printf("404 - %s - %s\n", "widgets", fmt.Sprintf("%s/%s.html", widget, widget))
+			log.Printf("404 - %s - %s\n", "widgets", utils.EscapeString(fmt.Sprintf("%s/%s.html", widget, widget)))
 		}
 
 	}
@@ -193,7 +194,7 @@ func (s *Server) WidgetHandler(w http.ResponseWriter, r *http.Request) {
 	template, err := gerb.ParseString(true, tplWidget)
 
 	if err != nil {
-		log.Printf("500 - %s - %s\n", r.URL.Path, err.Error())
+		log.Printf("500 - %s - %s\n", utils.EscapeString(r.URL.Path), err.Error())
 		http.NotFound(w, r)
 		return
 	}
@@ -243,7 +244,7 @@ func (s *Server) StaticHandler(w http.ResponseWriter, r *http.Request) {
 
 	content, FSTYPE, err := s.fileGetContent(r.URL.Path[8:], "public")
 	if err != nil {
-		log.Printf("404 - %s - %s\n", "public", r.URL.Path[8:])
+		log.Printf("404 - %s - %s\n", "public", utils.EscapeString(r.URL.Path[8:]))
 		http.NotFound(w, r)
 		return
 	}
@@ -297,7 +298,7 @@ func (s *Server) DashboardHandler(w http.ResponseWriter, r *http.Request) {
 			http.Redirect(w, r, fmt.Sprintf("/%s/", dashboardpath), http.StatusTemporaryRedirect)
 			return
 		}
-		log.Printf("404 - %s - %s\n", "dashboards", fmt.Sprintf("%s.gerb", dashboardpath))
+		log.Printf("404 - %s - %s\n", "dashboards", utils.EscapeString(fmt.Sprintf("%s.gerb", dashboardpath)))
 		http.NotFound(w, r)
 		return
 	}
@@ -315,7 +316,7 @@ func (s *Server) DashboardHandler(w http.ResponseWriter, r *http.Request) {
 	template, err := gerb.ParseString(true, tplDashboard, tplLayout)
 
 	if err != nil {
-		log.Printf("500 - %s - %s\n", r.URL.Path, err.Error())
+		log.Printf("500 - %s - %s\n", utils.EscapeString(r.URL.Path), err.Error())
 		http.NotFound(w, r)
 		return
 	}
